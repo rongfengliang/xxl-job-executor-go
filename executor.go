@@ -125,6 +125,7 @@ func (e *executor) runTask(writer http.ResponseWriter, request *http.Request) {
 	defer e.mu.Unlock()
 	req, _ := ioutil.ReadAll(request.Body)
 	param := &RunReq{}
+	e.log.Info(string(req))
 	err := json.Unmarshal(req, &param)
 	if err != nil {
 		_, _ = writer.Write(returnCall(param, FailureCode, "params err"))
